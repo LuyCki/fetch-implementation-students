@@ -5,6 +5,7 @@ fetch("http://localhost:3000/users")
 // Simple fetch implementation with callbacks
 function awesomeFetch(url, options, next, error) {
   let req = new XMLHttpRequest();
+
   req.onload = function () {
     if (req.status >= 200 && req.status < 300) {
       next(new Response(req.response, { status: req.status }));
@@ -28,7 +29,6 @@ function awesomeFetch(url, options, next, error) {
 
 awesomeFetch(
   "http://localhost:3000/users",
-  { method: "GET" },
   async (request) => {
     const req = await request.json();
     console.log(req);
@@ -42,6 +42,7 @@ awesomeFetch(
 function amazingFetch(url, options) {
   return new Promise((resolve, reject) => {
     let req = new XMLHttpRequest();
+
     req.onload = function () {
       if (req.status >= 200 && req.status < 300) {
         resolve(new Response(req.response, { status: req.status }));
@@ -67,15 +68,13 @@ function amazingFetch(url, options) {
 amazingFetch("http://localhost:3000/users", {
   method: "POST",
   headers: {
-    'Content-Type': 'application/json'
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({ name: "Andreea" }),
 })
   .then((request) => request.json())
   .then((users) => console.log(users))
-	.catch((error) => console.log(error))
+  .catch((error) => console.log(error));
 
-// Complex fetch implementation to be done :D 
-function amazingAwesomeFetch() {
-  
-}
+// Complex fetch implementation to be done :D
+function amazingAwesomeFetch() {}
